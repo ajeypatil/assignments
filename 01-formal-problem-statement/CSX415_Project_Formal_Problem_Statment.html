@@ -11,7 +11,6 @@
 
 <meta name="author" content="Ajey Patil, ajeypatil@gmail.com" />
 
-<meta name="date" content="2018-04-15" />
 
 <title>CSX415 Project : Airline Delays and Cancellation Analysis</title>
 
@@ -104,7 +103,7 @@ $(document).ready(function () {
 
 <h1 class="title toc-ignore">CSX415 Project : Airline Delays and Cancellation Analysis</h1>
 <h4 class="author"><em>Ajey Patil, <a href="mailto:ajeypatil@gmail.com">ajeypatil@gmail.com</a></em></h4>
-<h4 class="date"><em>04/15/2018</em></h4>
+<h4 class="date"><em>04/15/2018, 04/28/2018</em></h4>
 
 </div>
 
@@ -116,49 +115,88 @@ $(document).ready(function () {
 <div id="overview" class="section level1">
 <h1><span class="header-section-number">2</span> Overview</h1>
 <p>When multiple airlines are available in metro area, then residents have choice of airline. An analysis of airlines performance in terms of flight delay and cancellation is required for passengers to choose an airline with least cancelations and delays.</p>
+<p>Decision Prediction The predictions of best airline of choice in US would be made based on how big the airline is in terms of number of flights and relative delays and cancellations per flight.</p>
 </div>
 <div id="data-sources" class="section level1">
 <h1><span class="header-section-number">3</span> Data Sources</h1>
 <p>The U.S. Department of Transportation’s (DOT) Bureau of Transportation Statistics tracks the on-time performance of domestic flights operated by large air carriers. Summary information on the number of on-time, delayed, canceled, and diverted flights is published in DOT’s monthly Air Travel Consumer Report and in this dataset of 2015 flight delays and cancellations. <a href="https://www.kaggle.com/usdot/flight-delays/data" class="uri">https://www.kaggle.com/usdot/flight-delays/data</a></p>
 </div>
-<div id="stake-holders" class="section level1">
-<h1><span class="header-section-number">4</span> Stake Holders</h1>
-<p>Airline Passengers: this analysis will help them choose airline depending on airport performance of flight delays and cancellations</p>
-<p>Airport management: this report will help them determine systemic and process related issues affecting flight delays and cancellations</p>
-<p>Airline management: this report will help them determine best performing airports in terms of flight delays and canceellations and their reasons in scheduling and flight route planning.</p>
-<p>Regulatory boards: this analysis will assist in identifying consistenly low performing airlines in terms of flight cancellations and delays and their reasons</p>
+<div id="key-roles" class="section level1">
+<h1><span class="header-section-number">4</span> Key Roles</h1>
+<div id="model-creation" class="section level2">
+<h2><span class="header-section-number">4.1</span> Model Creation</h2>
+<ol style="list-style-type: decimal">
+<li>Model Creator : Ajey Patil</li>
+</ol>
+</div>
+<div id="model-experts" class="section level2">
+<h2><span class="header-section-number">4.2</span> Model Experts</h2>
+<ol style="list-style-type: decimal">
+<li>The U.S. Department of Transportation’s (DOT) Bureau of Transportation Statistics</li>
+</ol>
+</div>
+<div id="model-users" class="section level2">
+<h2><span class="header-section-number">4.3</span> Model Users</h2>
+<ol style="list-style-type: decimal">
+<li>Airline Passengers: this analysis will help them choose airline depending on airport performance of flight delays and cancellations</li>
+<li>Airport management: this report will help them determine systemic and process related issues affecting flight delays and cancellations</li>
+<li>Airline management: this report will help them determine best performing airports in terms of flight delays and canceellations and their reasons in scheduling and flight route planning.</li>
+<li>Regulatory boards: this analysis will assist in identifying consistenly low performing airlines in terms of flight cancellations and delays and their reasons</li>
+</ol>
+</div>
+</div>
+<div id="current-state-and-reasons-for-project-consideration" class="section level1">
+<h1><span class="header-section-number">5</span> Current State and Reasons for Project Consideration:</h1>
+<p>This project was considered for analysis due to increasing number of complaints from airline passengers about the delays and cancellations of certain airlines and make predictions available to passengers of an airline based on past performance.</p>
 </div>
 <div id="deliverables" class="section level1">
-<h1><span class="header-section-number">5</span> Deliverables</h1>
+<h1><span class="header-section-number">6</span> Deliverables</h1>
 <p>The deliverables for this project will include a report of all the findings, r code, all of which will be published on GitHub.</p>
-<p>Specific questions to be explored</p>
-<pre><code>What is co-relation between airline and day of week of flight that got cancelled ?
+<p>Specific analysis to be done and questions to be explored</p>
+<pre><code>Chart of all airlines and number of flights cancelled per day of week.
 
-What is co-relation between airline and day of week of flight that got delayed ?
+Chart of all airlines and number of flights delayes per day of week.
 
-What is co-relation between delay time and airline and day of week ?
+Chart of average delay time and all airlines and day of week.
 
-Categorize the delay reason for flights for airline and numbers of delays per delay reason
+Chart of Category the delay reason for flights for airline and numbers of delays per delay reason
 
 Based on number of delays per delay reason and number of delays per day of week, 
 predict best airline for minimum flight delay and cancellations.</code></pre>
 </div>
 <div id="success-criteria" class="section level1">
-<h1><span class="header-section-number">6</span> Success Criteria</h1>
-<p>Success criteria of project is ability of R-code to generate report for deliverables for data from different years of observations of data.</p>
+<h1><span class="header-section-number">7</span> Success Criteria</h1>
+<p>Success criteria of project:</p>
+<p>Benefits of the Project: Airline Passengers will be able to choose best airline and Airline Management will be made aware of quality of their service</p>
+<p>Project Success Metric: When the analysis is done year-or-year, the improvement in average delays and cancellations per airline is measurable and is expected to reduce 10% year-over-year</p>
+<p>Model Analysis Success Metric: The model analysis and prediction should predict airline delays and cancellations with accuracy greater than 95% and ROC greater than 0.75</p>
 </div>
 <div id="risks" class="section level1">
-<h1><span class="header-section-number">7</span> Risks</h1>
-<p>Availability of data in required format for different years of observations of data</p>
+<h1><span class="header-section-number">8</span> Risks</h1>
+<ol style="list-style-type: decimal">
+<li><p>Availability of data in required format for different years of observations of data</p></li>
+<li><p>Project Risks: Airlines cannot improve improve delays and cancellations year-over-year</p></li>
+<li><p>Prediction Risks: Model Analysis and Prediction cannot predict with accuracy greater than 95% and ROC greater than 0.75 then more data is needed</p></li>
+</ol>
 </div>
 <div id="deployment-phases" class="section level1">
-<h1><span class="header-section-number">8</span> Deployment Phases</h1>
+<h1><span class="header-section-number">9</span> Deployment Phases</h1>
 <p>Initial Analysis Phase: R-code for preliminary analysis of data</p>
 <p>Initial Prediction Phase: R-code for preliminary prediction of deliverables</p>
 <p>Final Model Deployment Phase: R-code to generate reports for yearly data</p>
+<p>Deployment to Airline Passengers Impact: This model would be deployed to all airline passengers as yearly report and they can make choice of airline for up-coming year based on report.</p>
+<p>Risks of Deployment: The deployment of model as yearly report may be rejected by airline and hence analysis performed must be made public to airlines which can then verify the scientific analysis of the data.</p>
+</div>
+<div id="timeline-of-project" class="section level1">
+<h1><span class="header-section-number">10</span> Timeline of Project</h1>
+<ol style="list-style-type: decimal">
+<li><p>Data Availablity: Yearly data made available The U.S. Department of Transportation’s (DOT) Bureau of Transport Statistics</p></li>
+<li><p>Prediction Report Availability : One month after yearly data is made available</p></li>
+<li><p>Effort Required for Predictions : One man-month</p></li>
+</ol>
 </div>
 <div id="costs" class="section level1">
-<h1><span class="header-section-number">9</span> Costs</h1>
+<h1><span class="header-section-number">11</span> Costs</h1>
 <p>To be estimated</p>
 </div>
 
