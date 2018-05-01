@@ -1,0 +1,73 @@
+---
+title: "Skeleton"
+author: "Ajey Patil"
+date: "5/1/2018"
+output: html_document
+---
+
+
+# Objective
+
+
+# Overview
+
+
+Decision Prediction
+
+
+# Data Sources
+
+
+# Key Roles
+## Model Creation
+
+## Model Experts
+
+## Model Users
+
+# Current State and Reasons for Project Consideration:
+
+
+# Deliverables
+
+Specific analysis to be done and questions to be explored
+
+
+# Success Criteria
+
+Success criteria of project:
+
+Benefits of the Project:
+
+Project Success Metric:
+
+Model Analysis Success Metric:
+
+# Risks
+
+Project Risks:
+
+Prediction Risks: 
+
+# Deployment Phases
+
+Initial Analysis Phase: 
+
+Initial Prediction Phase: 
+
+Final Model Deployment Phase: 
+
+Deployment to Airline Passengers Impact:
+
+Risks of Deployment:
+
+# Timeline of Project
+
+Data Availablity: 
+
+Prediction Report Availability : 
+
+Effort Required for Predictions :
+
+# Costs
+
