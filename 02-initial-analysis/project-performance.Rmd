@@ -1,80 +1,103 @@
 ---
-title: "project-performance"
+title: "CSX415_Project_flight_delay_cancellation_analysis"
 author: "Ajey Patil"
-date: "4/15/2018"
+date: "5/7/2018"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
 ## R Markdown
+### Data Cleaning done in load.project() data munging
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r load_library_and_project}
-
-library("ProjectTemplate")
-
-library("data.table")
-
-setwd("~/R/AirlineDelayAndCancellationsAnalysis")
-
+```{r, message=F, warning=F}
+#currdir <- getwd()
+#install.packages('ProjectTemplate')
+library(ProjectTemplate)
 load.project()
-
 ```
 
-## Analyse flight delays
-```{r analyze flight delays}
-
-alldelays <- data.frame(flights$AIRLINE, flights$DEPARTURE_DELAY)
-
-alldelays[is.na(alldelays)] <- 0
-
-alldelaysagg <- aggregate(alldelays$flights.DEPARTURE_DELAY, by=list(alldelays$flights.AIRLINE), FUN=sum )
-
-fdelay <- alldelaysagg[order(-alldelaysagg$x),]
-
-setnames(fdelay,"Group.1","IATA_CODE")
-
-setnames(fdelay,"x","Total Delays")
-
-fmdelay <- merge(x=fdelay,y=airlines,by="IATA_CODE",all=TRUE)
-
-fsdelay <- fmdelay[order(-fmdelay$`Total Delays`),]
-
+```{r setup, include=FALSE, echo=FALSE}
+knitr::opts_chunk$set(echo=TRUE)
 ```
 
-```{r find average flight delay per flight}
-flights$FLIGHT_INSTANCE <- 1
+## Install Packages
 
-allfilghtsinstance <- aggregate(flights$FLIGHT_INSTANCE, by=list(flights$AIRLINE), FUN=sum )
-
-setnames(allfilghtsinstance, "Group.1", "IATA_CODE")
-
-setnames(allfilghtsinstance, "x", "NumFlights")
-
-aggf = merge(x=allfilghtsinstance,y=fmdelay,by="IATA_CODE",all=TRUE)
-
-aggf$ave_delay <- (aggf$`Total Delays` * 1.0) / aggf$NumFlights
-
-aggfs <- aggf[order(-aggf$ave_delay),]
-
+```{r install packages}
+#Example package for RMSE calculation in Regression Analysis
+#devtools::install_github("ajeypatil/rmse")
+#library(rmse)
 ```
 
-## Including Plots
+## Perform Exploratory Data Analysis
+#### graphs stored in graph directory
 
-You can also embed plots, for example:
-
-```{r Sorted Flight Total Delays, echo=FALSE}
-
-aggfsplot <- data.frame(aggfs$NumFlights, aggfs$`Total Delays`, aggfs$ave_delay)
-
-plot(aggfsplot)
-
+```{r Perform Exploratory Data Analysis : graphs stored in graph directory}
+source('src/01-EDA/CSX415_Project_ExploratoryDataAnalysis.R')
+```
+## PreProcess Data
+#### Remove zero variance columns
+#### Test-Train split
+```{r preprocess}
+source('src/02-PREPROCESS/CSX415_Project_process.R')
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+## Modelling
+#### Apply Model
+
+### Naive Bayes
+```{r naive bayes}
+source('src/03-MODELS/CSX415_Project_Data_Model_Naive.R')
+#nb.model
+#summary(nb.model)
+plot(nb.model)
+```
+
+### Logistic Regression model
+```{r glm}       
+# Logistic Regression model for flights data takes more than 10 hours
+# to train, the trained model is saved but is 3.9 Gb in size (.rds)
+# Also the ROC calculated is only 0.592, hence not using this model
+#source('src/03-MODELS/CSX415_Project_Data_Model_LogisticRegression.R')
+#glm.model
+#summary(glm.model)
+#plot.roc(TestData$DelayedOrCancelled,glm_predictions,print.auc=TRUE,main="GLM Model ROC")
+```
+
+### Tree
+```{r rpart}       
+source('src/03-MODELS/CSX415_Project_Data_Model_Tree.R')
+#tree.model
+#summary(tree.model)
+#plot(tree.model)
+plot.roc(TestData$DelayedOrCancelled,tr_predictions[,2],print.auc=TRUE,main="Tree Model ROC")
+```
+
+## Model Evaluation
+### Naive Bayes Model Evaluation
+
+```{r model Naive Bayes evaluation}
+confusionMatrix(TestData$DelayedOrCancelled,nb_predictions)
+```
+
+
+### Tree Model Evaluation
+
+```{r Tree Model evaluation}
+tr_pred <- ifelse((tr_predictions[,2]>0.8), 1,0)
+confusionMatrix(TestData$DelayedOrCancelled,tr_pred)
+```
+
+## Model Selection
+### Tree Model is more accurate and ROC is greater than 0.75 as required
+### compared to Naive Bayes model.
+### .
+### Logistic Regression model takes long time to train and ROC is less
+### than 0.65 hence not selecting Logistic Regression model also because
+### saved model .rds is 3.9 Gb in size hence not suitable for deloyment
+### .
+### Comparing the metrics, the accuracy and Kappa values of Tree Model
+### are greater than Naive Bayes Model
+### .
+### Conclusion: Tree Model satisfies the requirements criteria of 
+### accuracy greater than 70% and ROC(AUC) greater than 0.65 and hence
+### used for deployment
+
